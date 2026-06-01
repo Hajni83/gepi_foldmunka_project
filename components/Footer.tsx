@@ -1,7 +1,16 @@
-import Link from "next/link";
-import { Camera, MessageCircle, Briefcase, ArrowUp } from "lucide-react";
+import { Camera, MessageCircle, Briefcase } from "lucide-react";
+import { SiteContent } from "@/sanity/types";
 
-export function Footer() {
+interface FooterProps {
+  content: SiteContent | null;
+}
+
+export function Footer({ content }: FooterProps) {
+  const description = content?.footerDescription ?? "Prémium gépi földmunka szolgáltatások Magyarország egész területén. Modern technológia, precíz kivitelezés, megbízható szakértelem.";
+  const address = content?.footerAddress ?? "1024 Budapest, Példa utca 1.";
+  const phone = content?.footerPhone ?? "+36 30 123 4567";
+  const email = content?.footerEmail ?? "info@gepifoldmunka.hu";
+
   return (
     <footer className="bg-deep-black border-t border-white/5 pt-20 pb-10">
       <div className="max-w-7xl mx-auto px-6">
@@ -13,10 +22,7 @@ export function Footer() {
                 GÉPI <span className="text-industrial-yellow">FÖLDMUNKA</span>
               </span>
             </div>
-            <p className="text-gray-500 text-sm leading-relaxed">
-              Prémium gépi földmunka szolgáltatások Magyarország egész területén. 
-              Modern technológia, precíz kivitelezés, megbízható szakértelem.
-            </p>
+            <p className="text-gray-500 text-sm leading-relaxed">{description}</p>
             <div className="flex gap-4">
               <a href="#" className="w-10 h-10 glass flex items-center justify-center rounded-sm hover:bg-industrial-yellow hover:text-black transition-all">
                 <MessageCircle size={20} />
@@ -49,9 +55,7 @@ export function Footer() {
             <h4 className="text-white font-bold uppercase tracking-widest text-sm mb-8">Szolgáltatások</h4>
             <ul className="space-y-4">
               {["Alapásás", "Tereprendezés", "Árokásás", "Bontás", "Sittszállítás"].map((item) => (
-                <li key={item} className="text-gray-500 text-sm uppercase tracking-wider font-medium">
-                  {item}
-                </li>
+                <li key={item} className="text-gray-500 text-sm uppercase tracking-wider font-medium">{item}</li>
               ))}
             </ul>
           </div>
@@ -60,9 +64,9 @@ export function Footer() {
           <div>
             <h4 className="text-white font-bold uppercase tracking-widest text-sm mb-8">Elérhetőség</h4>
             <div className="space-y-4 text-sm text-gray-500 uppercase tracking-wider font-medium">
-              <p>1024 Budapest, Példa utca 1.</p>
-              <p>+36 30 123 4567</p>
-              <p>info@gepifoldmunka.hu</p>
+              <p>{address}</p>
+              <p>{phone}</p>
+              <p>{email}</p>
             </div>
           </div>
         </div>
@@ -80,3 +84,4 @@ export function Footer() {
     </footer>
   );
 }
+
